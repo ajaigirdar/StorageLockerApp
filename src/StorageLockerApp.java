@@ -85,12 +85,10 @@ public class StorageLockerApp {
     // printReceipt
 
     // getLockerPin
-    public static String getLockerPin(String prompt){
-        String lockerPinInput;
+    public static String getLockerPin(){
         Scanner console = new Scanner(System.in);
         System.out.print("Enter locker PIN: ");
-        lockerPinInput = prompt;
-        return lockerPinInput;
+        return console.nextLine();
     }
     // isLockerNumberValid
     public static boolean isLockerNumberValid(String prompt) {
@@ -104,12 +102,18 @@ public class StorageLockerApp {
         return isValid;
     }
     // getLockerNumber
-    public static String getLockerNumber(String prompt){
-        String lockerNumberInput;
+//    public static String getLockerNumber(String prompt){
+//        String lockerNumberInput;
+//        Scanner console = new Scanner(System.in);
+//        System.out.print("Enter locker number: ");
+//        lockerNumberInput = prompt;
+//        return lockerNumberInput;
+//    }
+
+    public static String getLockerNumber(){
         Scanner console = new Scanner(System.in);
         System.out.print("Enter locker number: ");
-        lockerNumberInput = prompt;
-        return lockerNumberInput;
+        return console.nextLine();
     }
     // openLocker
     // releaseLocker
@@ -153,8 +157,16 @@ public class StorageLockerApp {
         lockerAvailable[firstAvailableLocker] = false;
     }
 
-    public static String accessLocker() {
-        return null;
+    public static void accessLocker() {
+        for (int i = 0; i < lockerID.length; i++){
+            if (getLockerNumber().equals(lockerID[i]) && getLockerPin().equals(lockerPin[i])) {
+                System.out.println("Success!");
+                System.out.println("Locker " + lockerID[i] + " is open.");
+                break;
+            }else {
+                System.out.println("Invalid locker number or PIN");
+            }
+        }
     }
 
     public static String releaseLocker() {
