@@ -1,5 +1,6 @@
 // TODO import java utilities - Scanner, Random
 
+import javax.xml.transform.Source;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -20,6 +21,14 @@ public class StorageLockerApp {
             if (menuChoice == 1) {
                 rentLocker();
             }
+            if (menuChoice == 2) {
+                accessLocker();
+            }
+            if (menuChoice == 3) {
+                releaseLocker();
+            }else
+                System.out.println("Thank you! Bye");
+            break;
         }
 //        getAvailableLocker();
 //        getAvailableLocker();
@@ -57,7 +66,6 @@ public class StorageLockerApp {
     }
 
     // methods
-    // getAvailableLocker
 
     public static int getAvailableLocker() {
         int firstAvailableLocker = -1;
@@ -76,9 +84,17 @@ public class StorageLockerApp {
         return lockerPinTest;
     }
     // printReceipt
+
     // getLockerNumber
     // isLockerNumberValid
     // getLockerNumber
+    public static String getLockerNumber(String prompt){
+        String lockerNumberInput;
+        Scanner console = new Scanner(System.in);
+        System.out.print("Enter locker number: ");
+        lockerNumberInput = prompt;
+        return lockerNumberInput;
+    }
     // openLocker
     // releaseLocker
 
@@ -109,6 +125,7 @@ public class StorageLockerApp {
         System.out.print("Enter: ");
         return Integer.parseInt(console.nextLine());
     }
+
 
     public static void rentLocker() {
         int firstAvailableLocker = getAvailableLocker();
