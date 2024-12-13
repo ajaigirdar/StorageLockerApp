@@ -3,12 +3,14 @@ import java.util.Scanner;
 
 public class StorageLockerApp {
     static String[] lockerID = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-    static String[] lockerPin = {"1111", "2222", "3333", "4444", "5555", "6666", "7777", "8888", "9999", "1010"};
-    public static boolean[] lockerAvailable = {true, true, true};
+//    static String[] lockerPin = {"1111", "2222", "3333", "4444", "5555", "6666", "7777", "8888", "9999", "1010"};
+    static String[] lockerPin = new String[10];
+    public static boolean[] lockerAvailable = {true, true, true, true, true, true, true, true, true, true};
     static int totalAvailableLockers = 10;
 
     public static void main(String[] args) {
         boolean keepRunning = true;
+        initializeLocker();
 
         while(keepRunning) {
             displayMainMenu();
@@ -32,6 +34,12 @@ public class StorageLockerApp {
         }
     }
 
+    public static void initializeLocker() {
+        for (int i = 0; i < lockerID.length; i++){
+            lockerPin[i] = generatePin();
+        }
+    }
+
     public static int getAvailableLocker() {
         int firstAvailableLocker = -1;
         for (int i = 0; i < lockerAvailable.length; i++){
@@ -43,9 +51,8 @@ public class StorageLockerApp {
     }
 
     public static String generatePin() {
-        String pin;
         Random random = new Random();
-        return Integer.toString(random.nextInt(9999));
+        return String.format("%04d", random.nextInt(10000));
     }
 
     public static String getLockerPin(){
