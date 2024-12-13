@@ -1,4 +1,3 @@
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -42,21 +41,19 @@ public class StorageLockerApp {
         }
         return firstAvailableLocker;
     }
-    // generatePin
 
-    public static int generatePin() {
+    public static String generatePin() {
+        String pin;
         Random random = new Random();
-        return random.nextInt(9999);
+        return Integer.toString(random.nextInt(9999));
     }
-    // printReceipt
 
-    // getLockerPin
     public static String getLockerPin(){
         Scanner console = new Scanner(System.in);
         System.out.print("Enter locker PIN: ");
         return console.nextLine();
     }
-    // isLockerNumberValid
+
     public static boolean isLockerNumberValid(String prompt) {
         boolean isValid = false;
         for (int i = 0; i < lockerID.length; i++){
@@ -67,22 +64,12 @@ public class StorageLockerApp {
         }
         return isValid;
     }
-//    public static String getLockerNumber(String prompt){
-//        String lockerNumberInput;
-//        Scanner console = new Scanner(System.in);
-//        System.out.print("Enter locker number: ");
-//        lockerNumberInput = prompt;
-//        return lockerNumberInput;
-//    }
 
     public static String getLockerNumber(){
         Scanner console = new Scanner(System.in);
         System.out.print("Enter locker number: ");
         return console.nextLine();
     }
-    // openLocker
-    // releaseLocker
-
 
     public static void displayMainMenu() {
         System.out.println("What would you like to do next?");
@@ -95,15 +82,6 @@ public class StorageLockerApp {
                 "              3. Release a Locker\n" +
                 "              ---\n" +
                 "              Any other key to exit.");
-        /*
-        - what would you like to do next?
-        - if locker is available, print -
-            1. rent a locker
-            2. access a locker
-            3. release a locker
-            ---
-            4. any other key to exit
-         */
     }
 
     public static int getChoices(){
@@ -112,27 +90,6 @@ public class StorageLockerApp {
         return Integer.parseInt(console.nextLine());
     }
 
-
-//    public static void rentLocker() {
-//        int firstAvailableLocker = getAvailableLocker();
-//        System.out.println("Success!");
-//        System.out.println("Locker ID: " + lockerID[firstAvailableLocker]);
-//        System.out.println("Your PIN: " + lockerPin[firstAvailableLocker]);
-//        System.out.println("Thank you.");
-//        lockerAvailable[firstAvailableLocker] = false;
-//    }
-
-//    public static void rentLocker() {
-//        int firstAvailableLocker;
-//        while (getAvailableLocker() != -1) {
-//            firstAvailableLocker = getAvailableLocker();
-//            System.out.println("Success!");
-//            System.out.println("Locker ID: " + lockerID[firstAvailableLocker]);
-//            System.out.println("Your PIN: " + lockerPin[firstAvailableLocker]);
-//            System.out.println("Thank you.");
-//            lockerAvailable[firstAvailableLocker] = false;
-//        }
-//    }
 public static void rentLocker() {
     int firstAvailableLocker;
     if (getAvailableLocker() != -1) {

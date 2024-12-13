@@ -3,3 +3,5 @@
 3. Fixed the for loops in accessLocker() and releaseLocker()
 4. Adding switch to the menu options
 5. the app seems to be working. adding all 10 locker options back in the arrays 
+6. generated random numbers in int but taking input from user as string. converting int to string so i don't have to redo methods.
+7. now i have to store random pins into an array.
