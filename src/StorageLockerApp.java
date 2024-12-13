@@ -1,70 +1,37 @@
-// TODO import java utilities - Scanner, Random
 
-import javax.xml.transform.Source;
 import java.util.Random;
 import java.util.Scanner;
 
 public class StorageLockerApp {
-//    TODO define variables and array
-    static String[] lockerID = {"1", "2", "3"};
-    static String[] lockerPin = {"1111", "2222", "3333"};
-    public static boolean[] lockerAvailable = {true, false, true};
-//    TODO establish variable to 10 lockers
+    static String[] lockerID = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+    static String[] lockerPin = {"1111", "2222", "3333", "4444", "5555", "6666", "7777", "8888", "9999", "1010"};
+    public static boolean[] lockerAvailable = {true, true, true};
     static int totalAvailableLockers = 10;
-//    TODO setup Scanner
 
     public static void main(String[] args) {
+        boolean keepRunning = true;
 
-        while(true) {
+        while(keepRunning) {
             displayMainMenu();
             int menuChoice = getChoices();
-            if (menuChoice == 1) {
-                rentLocker();
+
+            switch (menuChoice) {
+                case 1:
+                    rentLocker();
+                    break;
+                case 2:
+                    accessLocker();
+                    break;
+                case 3:
+                    releaseLocker();
+                    break;
+                default:
+                    System.out.println("Exiting the application. See you soon!");
+                    keepRunning = false;
+                    break;
             }
-            if (menuChoice == 2) {
-                accessLocker();
-            }
-            if (menuChoice == 3) {
-                releaseLocker();
-            }else
-                break;
         }
-//        getAvailableLocker();
-//        getAvailableLocker();
-//        getAvailableLocker();
-
-
-
-
-
-
-        /*
-        2. user rents a locker.
-            - find first available locker
-
-            - assign a random pin (from 0 to 9999)
-            - print a thank you with locker number and pin
-            - display main menu
-
-        3. user Accesses a locker
-            - enter the locker number
-            - if the locker is rented ask for pin. if not then ask for locker number again.
-            - enter the locker pin
-            - if pin is correct, open the locker and print success message. if not ask for pin again.
-            - display the main menu.
-
-        4. user releases a locker
-            - access the locker
-            - confirm user is sure
-            - if they're sure, release the locker. if not display the main menu.
-
-        5. user exits
-            - exit application
-
-         */
     }
-
-    // methods
 
     public static int getAvailableLocker() {
         int firstAvailableLocker = -1;
@@ -79,8 +46,7 @@ public class StorageLockerApp {
 
     public static int generatePin() {
         Random random = new Random();
-        int lockerPinTest = 0000 + random.nextInt(9999);
-        return lockerPinTest;
+        return random.nextInt(9999);
     }
     // printReceipt
 
@@ -101,7 +67,6 @@ public class StorageLockerApp {
         }
         return isValid;
     }
-    // getLockerNumber
 //    public static String getLockerNumber(String prompt){
 //        String lockerNumberInput;
 //        Scanner console = new Scanner(System.in);
@@ -148,28 +113,62 @@ public class StorageLockerApp {
     }
 
 
-    public static void rentLocker() {
-        int firstAvailableLocker = getAvailableLocker();
+//    public static void rentLocker() {
+//        int firstAvailableLocker = getAvailableLocker();
+//        System.out.println("Success!");
+//        System.out.println("Locker ID: " + lockerID[firstAvailableLocker]);
+//        System.out.println("Your PIN: " + lockerPin[firstAvailableLocker]);
+//        System.out.println("Thank you.");
+//        lockerAvailable[firstAvailableLocker] = false;
+//    }
+
+//    public static void rentLocker() {
+//        int firstAvailableLocker;
+//        while (getAvailableLocker() != -1) {
+//            firstAvailableLocker = getAvailableLocker();
+//            System.out.println("Success!");
+//            System.out.println("Locker ID: " + lockerID[firstAvailableLocker]);
+//            System.out.println("Your PIN: " + lockerPin[firstAvailableLocker]);
+//            System.out.println("Thank you.");
+//            lockerAvailable[firstAvailableLocker] = false;
+//        }
+//    }
+public static void rentLocker() {
+    int firstAvailableLocker;
+    if (getAvailableLocker() != -1) {
+        firstAvailableLocker = getAvailableLocker();
         System.out.println("Success!");
         System.out.println("Locker ID: " + lockerID[firstAvailableLocker]);
         System.out.println("Your PIN: " + lockerPin[firstAvailableLocker]);
         System.out.println("Thank you.");
         lockerAvailable[firstAvailableLocker] = false;
+    } else {
+        System.out.println("Sorry! No lockers available.");
     }
+}
 
     public static void accessLocker() {
+        String lockerNumber = getLockerNumber();
+        String pin = getLockerPin();
         for (int i = 0; i < lockerID.length; i++){
-            if (getLockerNumber().equals(lockerID[i]) && getLockerPin().equals(lockerPin[i])) {
+            if ((lockerID[i].equals(lockerNumber)) && lockerPin[i].equals(pin)) {
                 System.out.println("Success!");
                 System.out.println("Locker " + lockerID[i] + " is open.");
                 break;
-            }else {
-                System.out.println("Invalid locker number or PIN");
             }
         }
     }
 
-    public static String releaseLocker() {
-        return null;
+    public static void releaseLocker() {
+        String lockerNumber = getLockerNumber();
+        String pin = getLockerPin();
+        for (int i = 0; i < lockerID.length; i++){
+            if ((lockerID[i].equals(lockerNumber)) && lockerPin[i].equals(pin)) {
+                System.out.println("Success!");
+                System.out.println("Locker " + lockerID[i] + " is released.");
+                lockerAvailable[i] = true;
+                break;
+            }
+        }
     }
 }
