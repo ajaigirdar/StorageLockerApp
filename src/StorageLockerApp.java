@@ -3,10 +3,8 @@ import java.util.Scanner;
 
 public class StorageLockerApp {
     static String[] lockerID = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-//    static String[] lockerPin = {"1111", "2222", "3333", "4444", "5555", "6666", "7777", "8888", "9999", "1010"};
     static String[] lockerPin = new String[10];
     public static boolean[] lockerAvailable = {true, true, true, true, true, true, true, true, true, true};
-    static int totalAvailableLockers = 10;
 
     public static void main(String[] args) {
         boolean keepRunning = true;
@@ -61,17 +59,6 @@ public class StorageLockerApp {
         return console.nextLine();
     }
 
-    public static boolean isLockerNumberValid(String prompt) {
-        boolean isValid = false;
-        for (int i = 0; i < lockerID.length; i++){
-            if (lockerID[i].equals(prompt)) {
-                isValid = true;
-                break;
-            }
-        }
-        return isValid;
-    }
-
     public static String getLockerNumber(){
         Scanner console = new Scanner(System.in);
         System.out.print("Enter locker number: ");
@@ -98,9 +85,8 @@ public class StorageLockerApp {
     }
 
 public static void rentLocker() {
-    int firstAvailableLocker;
-    if (getAvailableLocker() != -1) {
-        firstAvailableLocker = getAvailableLocker();
+    int firstAvailableLocker = getAvailableLocker();
+    if (firstAvailableLocker != -1) {
         System.out.println("Success!");
         System.out.println("Locker ID: " + lockerID[firstAvailableLocker]);
         System.out.println("Your PIN: " + lockerPin[firstAvailableLocker]);
@@ -119,6 +105,8 @@ public static void rentLocker() {
                 System.out.println("Success!");
                 System.out.println("Locker " + lockerID[i] + " is open.");
                 break;
+            } else {
+                System.out.println("Locker number and/or locker PIN don't match");
             }
         }
     }
@@ -132,6 +120,8 @@ public static void rentLocker() {
                 System.out.println("Locker " + lockerID[i] + " is released.");
                 lockerAvailable[i] = true;
                 break;
+            } else {
+                System.out.println("Locker number and/or locker PIN don't match");
             }
         }
     }
