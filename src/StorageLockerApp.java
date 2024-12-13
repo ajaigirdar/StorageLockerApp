@@ -27,8 +27,7 @@ public class StorageLockerApp {
             if (menuChoice == 3) {
                 releaseLocker();
             }else
-                System.out.println("Thank you! Bye");
-            break;
+                break;
         }
 //        getAvailableLocker();
 //        getAvailableLocker();
@@ -85,7 +84,14 @@ public class StorageLockerApp {
     }
     // printReceipt
 
-    // getLockerNumber
+    // getLockerPin
+    public static String getLockerPin(String prompt){
+        String lockerNumberInput;
+        Scanner console = new Scanner(System.in);
+        System.out.print("Enter locker PIN: ");
+        lockerNumberInput = prompt;
+        return lockerNumberInput;
+    }
     // isLockerNumberValid
     // getLockerNumber
     public static String getLockerNumber(String prompt){
