@@ -1,0 +1,1 @@
+1. i have make sure that i put an exception so that the user cannot enter more than available locker.

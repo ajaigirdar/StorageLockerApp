@@ -1,32 +1,35 @@
 // TODO import java utilities - Scanner, Random
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class StorageLockerApp {
 //    TODO define variables and array
-    static String[] lockerID = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-    public String[] lockerPin = {"1111", "2222", "3333", "44444", "5555", "6666", "7777", "8888", "9999", "1010"};
-    public static boolean[] lockerAvailable = {true, true, true, true, true, true, true, true, true, true};
+    static String[] lockerID = {"1", "2", "3"};
+    static String[] lockerPin = {"1111", "2222", "3333"};
+    public static boolean[] lockerAvailable = {true, false, true};
 //    TODO establish variable to 10 lockers
     static int totalAvailableLockers = 10;
 //    TODO setup Scanner
 
     public static void main(String[] args) {
 
-        displayMainMenu();
+        while(true) {
+            displayMainMenu();
+            int menuChoice = getChoices();
+            if (menuChoice == 1) {
+                rentLocker();
+            }
+        }
+//        getAvailableLocker();
+//        getAvailableLocker();
+//        getAvailableLocker();
 
-//        while(lockerAvailable.equals("false")){
-//            for (int i = 0; i <totalAvailableLockers; i++){
-//                if (totalAvailableLockers > 0){
-//                    totalAvailableLockers--;
-//
-//                    System.out.println("Success!");
-//                    System.out.println("Your locker number: ");
-//                    System.out.println("Your PIN: " + );
-//                    break;
-//                }
-//            }
-//        }
+
+
+
+
+
         /*
         2. user rents a locker.
             - find first available locker
@@ -55,12 +58,22 @@ public class StorageLockerApp {
 
     // methods
     // getAvailableLocker
+
+    public static int getAvailableLocker() {
+        int firstAvailableLocker = -1;
+        for (int i = 0; i < lockerAvailable.length; i++){
+            if (lockerAvailable[i]) {
+                return i;
+            }
+        }
+        return firstAvailableLocker;
+    }
     // generatePin
 
     public static int generatePin() {
         Random random = new Random();
-        int lockerPin = 0 + random.nextInt(9999);
-        return lockerPin;
+        int lockerPinTest = 0000 + random.nextInt(9999);
+        return lockerPinTest;
     }
     // printReceipt
     // getLockerNumber
@@ -72,14 +85,14 @@ public class StorageLockerApp {
 
     public static void displayMainMenu() {
         System.out.println("What would you like to do next?");
-        if (totalAvailableLockers > 0) {
+        if (getAvailableLocker() != -1) {
             System.out.println(
-                    "              1. Rent a Locker\n" +
-                    "              2. Access a Locker\n" +
-                    "              3. Release a Locker\n" +
-                    "              ---\n" +
-                    "              Any other key to exit.");
+                    "              1. Rent a Locker");
         }
+        System.out.println("              2. Access a Locker\n" +
+                "              3. Release a Locker\n" +
+                "              ---\n" +
+                "              Any other key to exit.");
         /*
         - what would you like to do next?
         - if locker is available, print -
@@ -91,12 +104,19 @@ public class StorageLockerApp {
          */
     }
 
-    public static String getChoices(){
-        return null;
+    public static int getChoices(){
+        Scanner console = new Scanner(System.in);
+        System.out.print("Enter: ");
+        return Integer.parseInt(console.nextLine());
     }
 
-    public static String rentLocker() {
-        return null;
+    public static void rentLocker() {
+        int firstAvailableLocker = getAvailableLocker();
+        System.out.println("Success!");
+        System.out.println("Locker ID: " + lockerID[firstAvailableLocker]);
+        System.out.println("Your PIN: " + lockerPin[firstAvailableLocker]);
+        System.out.println("Thank you.");
+        lockerAvailable[firstAvailableLocker] = false;
     }
 
     public static String accessLocker() {
