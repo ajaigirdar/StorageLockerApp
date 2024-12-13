@@ -86,13 +86,23 @@ public class StorageLockerApp {
 
     // getLockerPin
     public static String getLockerPin(String prompt){
-        String lockerNumberInput;
+        String lockerPinInput;
         Scanner console = new Scanner(System.in);
         System.out.print("Enter locker PIN: ");
-        lockerNumberInput = prompt;
-        return lockerNumberInput;
+        lockerPinInput = prompt;
+        return lockerPinInput;
     }
     // isLockerNumberValid
+    public static boolean isLockerNumberValid(String prompt) {
+        boolean isValid = false;
+        for (int i = 0; i < lockerID.length; i++){
+            if (lockerID[i].equals(prompt)) {
+                isValid = true;
+                break;
+            }
+        }
+        return isValid;
+    }
     // getLockerNumber
     public static String getLockerNumber(String prompt){
         String lockerNumberInput;
@@ -111,7 +121,8 @@ public class StorageLockerApp {
             System.out.println(
                     "              1. Rent a Locker");
         }
-        System.out.println("              2. Access a Locker\n" +
+        System.out.println(
+                "              2. Access a Locker\n" +
                 "              3. Release a Locker\n" +
                 "              ---\n" +
                 "              Any other key to exit.");
